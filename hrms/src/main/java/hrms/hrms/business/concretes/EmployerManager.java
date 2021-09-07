@@ -12,6 +12,7 @@ import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.EmployerDao;
 import hrms.hrms.entities.concretes.Employer;
+import hrms.hrms.entities.concretes.JobAdvert;
 
 @Service
 public class EmployerManager implements EmployerService{
@@ -43,16 +44,37 @@ public class EmployerManager implements EmployerService{
 	
 
 	@Override
-	public Result update(Employer employer) {
-		// TODO Auto-generated method stub
-		return null;
+	public Result update(Employer employer) 
+	{
+		this.employerDao.save(employer);
+		return new SuccessResult("İşveren eklendi");
 	}
 
 
 	@Override
-	public Result delete(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Result delete(int id) 
+	{
+		this.employerDao.deleteById(id);
+		return new SuccessResult("Employer deleted successfully.");
 	}
+
+
+	@Override
+	public Result getByWebsite(String website) 
+	{
+		
+		this.employerDao.getByWebsite(website);
+		return new SuccessResult("Website getirildi");
+		
+	}
+
+
+	@Override
+	public DataResult<Employer> getById(int id) 
+	{
+		return new SuccessDataResult<Employer>
+		(this.employerDao.getById(id));
+	}
+
 	
 }

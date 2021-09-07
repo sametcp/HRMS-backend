@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -65,8 +66,8 @@ public class JobAdvert {
 	@Column(name = "published_date")  // yayınlanma tarihi
 	private LocalDate publishedDate;
 	
-	@Column(name = "is_open")
-	private boolean isOpen;
+	//@Column(name = "is_open")
+	//private boolean isOpen;
 
 	@ManyToOne  
 	@JoinColumn(name = "job_position_id") // iş yerimde pozisyon id'si olacak
@@ -90,5 +91,9 @@ public class JobAdvert {
 	
 	@Column(name = "is_confirm")
 	private boolean isConfirm;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "jobAdvert", orphanRemoval = true)
+	private JobSeekerFavoriteJobAdverts jobSeekerFavoriteJobAdverts;
 	
 }

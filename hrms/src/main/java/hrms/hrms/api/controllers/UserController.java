@@ -3,6 +3,7 @@ package hrms.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +27,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<User>> getAll(){
-		return this.userService.getAll();
+	public ResponseEntity<?> getAll()
+	{
+		return ResponseEntity.ok(this.userService.getAll());
 	}
 	
 }

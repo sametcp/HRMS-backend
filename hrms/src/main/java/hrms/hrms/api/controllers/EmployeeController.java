@@ -2,10 +2,17 @@ package hrms.hrms.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.hrms.business.abstracts.EmployeeService;
@@ -26,20 +33,31 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Employee>> getall()
+	public ResponseEntity<?> getall()
 	{
-		
-		return this.employeeService.getAll();
-		
+		return ResponseEntity.ok(this.employeeService.getAll());
 	}
 	
 	
-	/*@PostMapping("/add")
-	public Result add(@RequestBody Employee employee)  
+	@PostMapping("/add")
+	public ResponseEntity<?> add(@Valid @RequestBody Employee employee)  
 	{
-		return this.employeeService.add(employee);  
+		return ResponseEntity.ok(this.employeeService.add(employee));  
 		
 	}
-	*/
+	
+	@PutMapping("/update")
+	public ResponseEntity<?> update(@RequestBody Employee employee){
+		
+		return ResponseEntity.ok(this.employeeService.update(employee));
+	}
+	
+	@GetMapping("/getById")
+	public ResponseEntity<?> getById(@RequestParam int id)
+	{
+		
+		return ResponseEntity.ok(this.employeeService.getById(id));
+		
+	}
 	
 }

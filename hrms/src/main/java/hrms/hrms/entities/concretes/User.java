@@ -39,7 +39,7 @@ public class User {
 	@Column(name= "id")
 	private int id;
 	
-	@Email
+	@Email(message = "Email adresi geçersizdir")
 	@Column(name= "email")
 	private String email;
 	

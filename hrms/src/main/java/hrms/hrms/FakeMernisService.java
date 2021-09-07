@@ -2,7 +2,7 @@ package hrms.hrms;
 
 public class FakeMernisService {
 	
-	public boolean ValidateByPersonalInfo(long nationalId, String firstName, String lastName, int yearOfBirth)
+	public boolean ValidateByPersonalInfo(String nationalId, String firstName, String lastName, int yearOfBirth)
 	{
 		System.out.println(firstName + " " + lastName + " is valid person." );
 		

@@ -2,7 +2,10 @@ package hrms.hrms.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,15 +32,15 @@ public class WorkHourController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody WorkHour workHour) 
+	public ResponseEntity<?> add(@Valid @RequestBody WorkHour workHour) 
 	{
-		return this.workHourService.add(workHour);
+		return ResponseEntity.ok(this.workHourService.add(workHour));
 	}
 	
 	@GetMapping("/getAll")
-	public DataResult<List<WorkHour>> getAll()
+	public ResponseEntity<?>getAll()
 	{
-		return this.workHourService.getAll();
+		return ResponseEntity.ok(this.workHourService.getAll());
 	}
 	
 }

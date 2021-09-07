@@ -8,7 +8,7 @@ import hrms.hrms.FakeMernisService;
 public class MernisServiceAdapter implements ValidationService{
 
 	@Override
-	public boolean validateByMernis(long nationalId, String firstName, String lastName, int yearOfBirth) 
+	public boolean validateByMernis(String nationalId, String firstName, String lastName, int yearOfBirth) 
 	{		
 		FakeMernisService client = new FakeMernisService();
 		boolean result = true;

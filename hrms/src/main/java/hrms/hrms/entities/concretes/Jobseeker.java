@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +28,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobSeekerFavoriteJobAdverts"})
 public class Jobseeker extends User{
 	 
 	@Column(name= "first_name")
@@ -72,6 +75,10 @@ public class Jobseeker extends User{
 	@JsonIgnore
 	@OneToOne(mappedBy = "jobseeker")
 	private ImageForCV image;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "jobseeker")
+	private List<JobSeekerFavoriteJobAdverts> jobSeekerFavoriteJobAdverts;
 	
 	// @JsonIgnore koyuyorum ki iş arayan kendini eklerken sadece kişisel bilgilerini ekleyebilsin.
 	// diğerlerini başka türlü ekleyecek. (Database'e başka türlü gelecek)

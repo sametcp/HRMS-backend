@@ -15,6 +15,7 @@ import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.core.verification.VerificationService;
 import hrms.hrms.entities.concretes.Employer;
 import hrms.hrms.entities.concretes.Jobseeker;
+import hrms.hrms.entities.concretes.User;
 import hrms.hrms.entities.concretes.VerificationCodes;
 
 @Service
@@ -63,10 +64,12 @@ public class AuthManager implements AuthService{
 			return new ErrorResult("Could not be added. Passwords do not match.");
 		}
 		
-		if (!checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebsite())) {
+		if (checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebsite())) {
 
-			return new ErrorResult("Invalid email address!.");
+			return new ErrorResult("Invalid email address!");
 		}
+		
+		
 
 		employerService.add(employer);
 		String code = verificationService.sendCode();
@@ -78,7 +81,7 @@ public class AuthManager implements AuthService{
 	@Override
 	public Result registerJobseeker(Jobseeker jobseeker, String confirmPassword) 
 	{
-		if (checkIfRealPerson(Long.parseLong(jobseeker.getNationalId()), jobseeker.getFirstName(),
+		if (checkIfRealPerson(jobseeker.getNationalId(), jobseeker.getFirstName(),
 				jobseeker.getLastName(), jobseeker.getDateOfBirth().getYear()) == false) 
 		{
 			return new ErrorResult("Could not be added. TCKN could not be verified.");
@@ -170,7 +173,7 @@ public class AuthManager implements AuthService{
 	}
 	
 	
-	private boolean checkIfRealPerson(long nationalId, String firstName, String lastName, int yearOfBirth) {
+	private boolean checkIfRealPerson(String nationalId, String firstName, String lastName, int yearOfBirth) {
 
 		if (validationService.validateByMernis(nationalId, firstName, lastName, yearOfBirth)) 
 		{
@@ -184,6 +187,17 @@ public class AuthManager implements AuthService{
 	private boolean checkIfEmailExists(String email) {
 
 		if (this.userService.getUserByEmail(email).getData() == null) 
+		{
+
+			return true;
+		}
+
+		return false;
+	}
+	
+	private boolean checkIfWebsiteExists(String website) {
+
+		if (this.employerService.getByWebsite(website) == null) 
 		{
 
 			return true;
@@ -209,6 +223,12 @@ public class AuthManager implements AuthService{
 		this.verificationCodeService.add(verificationCode);
 		System.out.println("Verification code has been sent to " + email );
 	
+	}
+
+	@Override
+	public Result login(User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

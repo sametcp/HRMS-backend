@@ -43,4 +43,7 @@ public class Employer extends User{
 	@OneToMany(mappedBy = "employer")
 	private List<JobAdvert> jobAdverts;
 	
+	@Column(name = "is_confirm")
+	private boolean isConfirm;
+	
 }

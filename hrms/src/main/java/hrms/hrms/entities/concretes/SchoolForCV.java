@@ -61,6 +61,7 @@ public class SchoolForCV {
 	@Column(name = "end_date")
 	private LocalDate endDate;
 
+	@JsonIgnore
 	@ManyToOne()  // okul birden fazla olabilir. o yüzden burada many.
 	@JoinColumn(name = "jobseeker_id")
 	private Jobseeker jobseeker;

@@ -62,6 +62,7 @@ public class ExperienceForCV {
 	@Column(name = "position")
 	private String position;
 	
+	@JsonIgnore
 	@ManyToOne()  // experience birden çok olabilir. kendi class'ında o yüzden many.
 	@JoinColumn(name = "jobseeker_id")  // one old. tek bir değişken tanımlamak yeterli jobseeker için.
 	private Jobseeker jobseeker; // jobseeker'ın birden fazla experience'ı olabileceğinden orda list.

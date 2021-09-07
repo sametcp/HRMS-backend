@@ -30,7 +30,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 public class ImageForCV {
 	 
-	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name= "id")
@@ -53,7 +52,6 @@ public class ImageForCV {
 	@Column(name = "url")
 	private String url;
 	
-	@JsonIgnore
 	@OneToOne()
     @JoinColumn(name = "jobseeker_id")
 	private Jobseeker jobseeker;

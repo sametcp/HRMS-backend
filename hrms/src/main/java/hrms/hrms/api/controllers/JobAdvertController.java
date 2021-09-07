@@ -1,21 +1,30 @@
 package hrms.hrms.api.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.hrms.business.abstracts.JobAdvertService;
 import hrms.hrms.core.utilities.results.DataResult;
+import hrms.hrms.core.utilities.results.ErrorDataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.JobAdvert;
 import hrms.hrms.entities.dtos.JobAdvertDto;
@@ -37,106 +46,108 @@ public class JobAdvertController {
 	
 	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody JobAdvertDto jobAdvertDto) 
+	public ResponseEntity<?> add(@Valid @RequestBody JobAdvertDto jobAdvertDto) 
 	{
-		return this.jobAdvertService.add(jobAdvertDto);
+		return ResponseEntity.ok(this.jobAdvertService.add(jobAdvertDto));
 	}
 	
 	
-	@PostMapping("/updateIsConfirm")
-	public Result updateIsConfirm(@RequestParam("isConfirm") boolean isConfirm, @RequestParam("id") int id)
+	@PutMapping("/updateIsConfirm")
+	public ResponseEntity<?> updateIsConfirm(@RequestParam("isConfirm") boolean isConfirm, @RequestParam("id") int id)
 	{
-		return this.jobAdvertService.updateIsConfirm(isConfirm, id );
+		return ResponseEntity.ok(this.jobAdvertService.updateIsConfirm(isConfirm, id ));
 	}
 	
-	
-	@PostMapping("/changeOpenToClose")
-	public Result changeOpenToClose(@RequestParam int id)
+	@PutMapping("/updateIsActive")
+	public ResponseEntity<?> updateIsActive(@RequestParam("isActive") boolean isActive, @RequestParam("id") int id)
 	{
-		return this.jobAdvertService.changeOpenToClose(id);
+		return ResponseEntity.ok(this.jobAdvertService.updateIsActive(isActive, id ));
 	}
-	
-	
-	
-	@PostMapping("/changeCloseToOpen")
-	public Result changeCloseToOpen(@RequestParam int id)
-	{
-		return this.jobAdvertService.changeCloseToOpen(id);
-	}
-	
 	
 	
 	@GetMapping("/findById")
-	public DataResult<JobAdvert> findById(@RequestParam int id)	
+	public ResponseEntity<?> findById(@RequestParam int id)	
 	{
-		return this.jobAdvertService.findById(id);
+		return ResponseEntity.ok(this.jobAdvertService.findById(id));
 	}
-	
 	
 	
 	@GetMapping("/getAll")
-	public DataResult<List<JobAdvert>> getAll()
+	public ResponseEntity<?> getAll()
 	{		
-		return this.jobAdvertService.getAll();
+		return ResponseEntity.ok(this.jobAdvertService.getAll());
 	}
-	
-	
-	
-	@GetMapping("/getAllOpenJobAdvertList")
-	public DataResult<List<JobAdvert>> getAllOpenJobAdvertList()
-	{
-		return this.jobAdvertService.getAllOpenJobAdvertList();
-	}
-	
-	
+		
 	
 	@GetMapping("/findAllByOrderByPublishedDateDesc")
-	public DataResult<List<JobAdvert>> findAllByOrderByPublishedAtDesc()
+	public ResponseEntity<?> findAllByOrderByPublishedAtDesc()
 	{
-		return this.jobAdvertService.findAllByOrderByPublishedDateDesc();
+		return ResponseEntity.ok(this.jobAdvertService.findAllByOrderByPublishedDateDesc());
 	}
-	
 	
 	
 	@GetMapping("/findAllByOrderByPublishedDateAsc")
-	public DataResult<List<JobAdvert>> findAllByOrderByPublishedDateAsc()
+	public ResponseEntity<?> findAllByOrderByPublishedDateAsc()
 	{
-		return this.jobAdvertService.findAllByOrderByPublishedDateAsc();		
+		return ResponseEntity.ok(this.jobAdvertService.findAllByOrderByPublishedDateAsc());		
 	}
 	
-	
-	
-	@GetMapping("/getAllOpenJobAdvertByEmployer")
-	public DataResult<List<JobAdvert>> getAllOpenJobAdvertByEmployer(@RequestParam int id)
-	{
-		return this.jobAdvertService.getAllOpenJobAdvertByEmployer(id);
-	}
 	
 	@GetMapping("/getByIsConfirm")
-	public DataResult<List<JobAdvert>> getByIsActive(@RequestParam boolean isConfirm) 
+	public ResponseEntity<?> getByIsConfirm(@RequestParam boolean isConfirm) 
 	{
-		return this.jobAdvertService.getByIsConfirm(isConfirm);
+		return ResponseEntity.ok(this.jobAdvertService.getByIsConfirm(isConfirm));
 	}
-
-	/*
-	@GetMapping("/getByIsConfirmAndIsActive")
-	public DataResult<List<JobAdvert>> getByIsConfirmAndIsActive(@RequestParam boolean isConfirm,
-			@RequestParam boolean isActive) 
-	{
-		return this.jobAdvertService.getByIsConfirmAndIsActive(isConfirm, isActive);
-	}
-	*/
 	
-	/*
-	@PostMapping("/updateisactive")
-	public Result updateIsActive(@RequestParam boolean isActive, @RequestParam int userId, @RequestParam int id) {
-		return this.jobAdvertService.updateIsActive(isActive, userId, id);
+	
+	@GetMapping("/getByIsActive")
+	public ResponseEntity<?> getByIsActive(@RequestParam boolean isActive) 
+	{
+		return ResponseEntity.ok(this.jobAdvertService.getByIsActive(isActive));
+	}
+	
+	
+	@GetMapping("/getAllByPage")
+	public ResponseEntity<?> getAll(int pageNo, int pageSize)
+	{
+		return ResponseEntity.ok(this.jobAdvertService.getAll(pageNo, pageSize));
 	}
 
-	@PostMapping("/updateisconfirm")
-	public Result updateIsConfirm(@RequestParam boolean isConfirm, @RequestParam int id) {
-		return this.jobAdvertService.updateIsConfirm(isConfirm, id);
+	
+	@GetMapping("/getByIsConfirmedAndIsActiveWithPage")
+	public ResponseEntity<?> getByIsConfirmAndIsActiveWithPage(@RequestParam boolean isConfirm,
+			@RequestParam boolean isActive, @RequestParam int pageNo, @RequestParam int pageSize) 
+	{
+		return ResponseEntity.ok(this.jobAdvertService.getByIsConfirmAndIsActive(isConfirm, isActive, pageNo, pageSize));
 	}
-	*/
+	
+	
+	@GetMapping("/getByIsConfirmedAndIsActive")
+	public ResponseEntity<?> getByIsConfirmAndIsActive(@RequestParam boolean isConfirm, @RequestParam boolean isActive) 
+	{
+		return ResponseEntity.ok(this.jobAdvertService.getByIsConfirmAndIsActive(isConfirm, isActive));
+	}
+	
+	
+	@GetMapping("/sortByCreatedDate")
+	public ResponseEntity<?> sortByCreatedDate() 
+	{
+		return ResponseEntity.ok(this.jobAdvertService.sortByCreatedDate());
+	}
+	
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorDataResult<Object> handleValidationException
+	(MethodArgumentNotValidException exceptions){
+		Map<String,String> validationErrors = new HashMap<String, String>();
+		for(FieldError fieldError : exceptions.getBindingResult().getFieldErrors()) {
+			validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+		}
+		
+		ErrorDataResult<Object> errors 
+		= new ErrorDataResult<Object>(validationErrors,"Doğrulama hataları");
+		return errors;
+	}
 	
 }

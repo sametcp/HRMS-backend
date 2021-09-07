@@ -54,6 +54,7 @@ public class ForeignLanguageForCV {
 	@Column(name = "level")
 	private String level;	
 
+	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name = "jobseeker_id")
 	private Jobseeker jobseeker;
