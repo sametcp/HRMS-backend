@@ -43,7 +43,7 @@ public class JobAdvert {
 	@Column(name = "created_date")
 	private Date createdDate;
 	
-	@JsonIgnore // bu kullanıcı nesnemi, istemciye göndermek istemiyorum.
+	//@JsonIgnore // bu kullanıcı nesnemi, istemciye göndermek istemiyorum.
 	@Column(name= "is_active")
 	private boolean isActive = true;
 	

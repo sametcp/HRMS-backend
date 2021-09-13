@@ -22,6 +22,8 @@ import hrms.hrms.dataAccess.abstracts.WorkHourDao;
 import hrms.hrms.dataAccess.abstracts.WorkTypeDao;
 import hrms.hrms.entities.concretes.JobAdvert;
 import hrms.hrms.entities.dtos.JobAdvertDto;
+import hrms.hrms.entities.dtos.JobAdvertFilter;
+
 import org.springframework.data.domain.Sort;
 
 
@@ -209,5 +211,15 @@ public class JobAdvertManager implements JobAdvertService{
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(sort),
 		"Oluşturulma tarihine göre listelendi.");
 	}
+
+	@Override
+	public DataResult<List<JobAdvert>> getByFilter(JobAdvertFilter jobAdvertFilter, int pageNo, int pageSize) 
+	{
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return new SuccessDataResult<List<JobAdvert>>(
+		this.jobAdvertDao.getByFilter(jobAdvertFilter, pageable).getContent(),
+		this.jobAdvertDao.getByFilter(jobAdvertFilter, pageable).getTotalPages() + "");
+	}
+
 
 }

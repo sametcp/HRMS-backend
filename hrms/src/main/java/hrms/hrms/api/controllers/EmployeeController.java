@@ -1,7 +1,5 @@
 package hrms.hrms.api.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.hrms.business.abstracts.EmployeeService;
-import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.entities.concretes.Employee;
 
 @RestController
@@ -47,7 +44,8 @@ public class EmployeeController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<?> update(@RequestBody Employee employee){
+	public ResponseEntity<?> update(@RequestBody Employee employee)
+	{
 		
 		return ResponseEntity.ok(this.employeeService.update(employee));
 	}

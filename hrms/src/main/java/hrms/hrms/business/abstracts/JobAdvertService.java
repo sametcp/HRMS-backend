@@ -6,6 +6,7 @@ import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.JobAdvert;
 import hrms.hrms.entities.dtos.JobAdvertDto;
+import hrms.hrms.entities.dtos.JobAdvertFilter;
 
 public interface JobAdvertService {
 	
@@ -32,5 +33,8 @@ public interface JobAdvertService {
 	
 	DataResult<List<JobAdvert>> getByIsConfirmAndIsActive(boolean isConfirm, boolean isActive, int pageNo, int pageSize);
 	DataResult<List<JobAdvert>> sortByCreatedDate();
+	
+	DataResult<List<JobAdvert>> getByFilter(JobAdvertFilter jobAdvertFilter, int pageNo, int pageSize);
+	
 	
 }

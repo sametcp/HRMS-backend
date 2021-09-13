@@ -28,6 +28,7 @@ import hrms.hrms.core.utilities.results.ErrorDataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.JobAdvert;
 import hrms.hrms.entities.dtos.JobAdvertDto;
+import hrms.hrms.entities.dtos.JobAdvertFilter;
 import hrms.hrms.entities.dtos.LinkForCVDto;
 
 @RestController
@@ -49,6 +50,14 @@ public class JobAdvertController {
 	public ResponseEntity<?> add(@Valid @RequestBody JobAdvertDto jobAdvertDto) 
 	{
 		return ResponseEntity.ok(this.jobAdvertService.add(jobAdvertDto));
+	}
+	
+	
+	@PostMapping("/getByFilter")
+	public ResponseEntity<?> getByFilter(@RequestBody JobAdvertFilter jobAdvertFilter,
+			@RequestParam int pageNo, @RequestParam int pageSize) 
+	{
+		return  ResponseEntity.ok(this.jobAdvertService.getByFilter(jobAdvertFilter, pageNo, pageSize));
 	}
 	
 	
@@ -129,11 +138,12 @@ public class JobAdvertController {
 	}
 	
 	
-	@GetMapping("/sortByCreatedDate")
-	public ResponseEntity<?> sortByCreatedDate() 
+	@GetMapping("/getSortedByCreatedDate")
+	public ResponseEntity<?> getSortedByCreatedDate() 
 	{
 		return ResponseEntity.ok(this.jobAdvertService.sortByCreatedDate());
 	}
+	
 	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
