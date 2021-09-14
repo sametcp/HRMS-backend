@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @SpringBootApplication
-@EnableSwagger2 // swigger'ı başlatır.
+@EnableSwagger2 // swagger'ı başlatır.
 public class HrmsApplication {
 
 	public static void main(String[] args) throws IOException 
