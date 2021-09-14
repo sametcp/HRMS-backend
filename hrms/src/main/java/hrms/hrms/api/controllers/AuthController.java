@@ -19,7 +19,6 @@ public class AuthController {
 	
 	private AuthService authService;
 	
-	
 	@Autowired
 	public AuthController(AuthService authService) {
 		super();

@@ -3,8 +3,6 @@ package hrms.hrms.api.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.PostRemove;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.hrms.business.abstracts.JobSeekerFavoriteJobAdvertService;
-import hrms.hrms.business.concretes.JobSeekerFavoriteJobAdvertManager;
 import hrms.hrms.core.utilities.results.ErrorDataResult;
 import hrms.hrms.entities.dtos.JobSeekerFavoriteJobAdvertDto;
 

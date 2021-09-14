@@ -1,7 +1,6 @@
 package hrms.hrms.api.controllers;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -21,9 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.hrms.business.abstracts.JobPositionsService;
-import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.ErrorDataResult;
-import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.JobPositions;
 
 @RestController  // controller olduğunu belirttim

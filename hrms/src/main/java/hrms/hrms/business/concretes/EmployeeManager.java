@@ -12,7 +12,6 @@ import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.EmployeeDao;
 import hrms.hrms.entities.concretes.Employee;
-import hrms.hrms.entities.concretes.Employer;
 
 @Service
 public class EmployeeManager implements EmployeeService{

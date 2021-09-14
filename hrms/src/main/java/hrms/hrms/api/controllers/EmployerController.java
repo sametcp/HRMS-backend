@@ -1,7 +1,6 @@
 package hrms.hrms.api.controllers;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -24,11 +23,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.hrms.business.abstracts.EmployerService;
-import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.ErrorDataResult;
-import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.Employer;
-import hrms.hrms.entities.dtos.ProgrammingSkillForCVDto;
 
 @RestController  // controller olduğunu belirttim
 @RequestMapping("/api/employer")  // istek alacağım domain
@@ -53,9 +49,13 @@ public class EmployerController {
 	@GetMapping("/getById")  // bilgileri database'den-kendimden veriyorum
 	public ResponseEntity<?> getById(@RequestParam int id)
 	{
-		
 		return ResponseEntity.ok(this.employerService.getById(id));
-		
+	}
+	
+	@GetMapping("/getByWebsite")  // bilgileri database'den-kendimden veriyorum
+	public ResponseEntity<?> getByWebsite(@RequestParam String website)
+	{
+		return ResponseEntity.ok(this.employerService.getByWebsite(website));
 	}
 	
 	

@@ -64,11 +64,16 @@ public class AuthManager implements AuthService{
 			return new ErrorResult("Could not be added. Passwords do not match.");
 		}
 		
-		if (checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebsite())) {
+		if (!checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebsite())) 
+		{
 
-			return new ErrorResult("Invalid email address!");
+			return new ErrorResult("E-mail adresinizin sonu ile website adresinizin aynı olması gerekir!");
 		}
 		
+		if(!checkIfWebsiteExists(employer.getWebsite())) 
+		{
+			return new ErrorResult("Bu website adresi zaten kullanılmış!");
+		}
 		
 
 		employerService.add(employer);
@@ -120,6 +125,13 @@ public class AuthManager implements AuthService{
 	}
 	
 	
+	@Override
+	public Result login(User user)
+	{
+		return new SuccessResult("Kullanıcı girişi başarılı");
+	}
+	
+	
 	private boolean checkIfNullInfoForEmployer(Employer employer) {
 
 		if (employer.getCompanyName() != null && employer.getWebsite() != null && employer.getEmail() != null
@@ -132,18 +144,6 @@ public class AuthManager implements AuthService{
 
 		return false;
 	}
-
-	private boolean checkIfEqualEmailAndDomain(String email, String website) {
-		String[] emailArr = email.split("@", 2);
-		String domain = website.substring(4, website.length());
-
-		if (emailArr[1].equals(domain)) {
-
-			return true;
-		}
-
-		return false;
-	}
 	
 	
 	private boolean checkIfNullInfoForJobseeker(Jobseeker jobseeker, String confirmPassword) {  // boş bilgi var mı?
@@ -152,14 +152,24 @@ public class AuthManager implements AuthService{
 				&& jobseeker.getDateOfBirth() != null && jobseeker.getPassword() != null && jobseeker.getEmail() != null
 				&& confirmPassword != null) 
 		{
-
+			
 			return true;
-
+			
 		}
 
 		return false;
 	}
 	
+
+	private boolean checkIfEqualEmailAndDomain(String email, String website) {
+		
+		String emailDomain = email.substring(email.indexOf("@") + 1);
+		if(website.contains(emailDomain)) 
+		{
+			return true;
+		}
+		return false;
+	}
 	
 	
 	private boolean checkIfExistsTcNo(String nationalId) {  // databasede başka bir kullanıcı var mı ?
@@ -188,7 +198,6 @@ public class AuthManager implements AuthService{
 
 		if (this.userService.getUserByEmail(email).getData() == null) 
 		{
-
 			return true;
 		}
 
@@ -197,9 +206,8 @@ public class AuthManager implements AuthService{
 	
 	private boolean checkIfWebsiteExists(String website) {
 
-		if (this.employerService.getByWebsite(website) == null) 
+		if (this.employerService.getByWebsite(website).getData() == null) 
 		{
-
 			return true;
 		}
 
@@ -208,7 +216,7 @@ public class AuthManager implements AuthService{
 
 	private boolean checkIfEqualPasswordAndConfirmPassword(String password, String confirmPassword) {
 
-		if (!password.equals(confirmPassword)) 
+		if (!confirmPassword.equals(password))
 		{
 			return false;
 		}
@@ -217,18 +225,13 @@ public class AuthManager implements AuthService{
 	}
 	
 	
-	private void verificationCodeRecord(int id, String code, String email) {
+	private void verificationCodeRecord(int id, String code, String email)
+	{
 		
 		VerificationCodes verificationCode = new VerificationCodes(id, code, false);
 		this.verificationCodeService.add(verificationCode);
 		System.out.println("Verification code has been sent to " + email );
 	
-	}
-
-	@Override
-	public Result login(User user) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

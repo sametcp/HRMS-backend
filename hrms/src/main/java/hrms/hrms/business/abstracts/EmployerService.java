@@ -5,13 +5,12 @@ import java.util.List;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.Employer;
-import hrms.hrms.entities.concretes.JobAdvert;
 public interface EmployerService {
 	
 	Result add(Employer employer);
 	Result update(Employer employer);
 	Result delete(int id);
-	Result getByWebsite(String website);
+	DataResult<Employer> getByWebsite(String website);
 	DataResult<Employer> getById(int id);
 	DataResult<List<Employer>> getAll();
 	

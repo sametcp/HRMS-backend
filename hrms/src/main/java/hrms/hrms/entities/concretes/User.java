@@ -33,7 +33,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 public class User {
 	
-	
+	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name= "id")
@@ -58,9 +58,11 @@ public class User {
 	@Column(name = "update_date")
 	private Date updateDate;
 	
+	@JsonIgnore
 	@Column(name= "is_active", columnDefinition = "boolean default true")
 	private boolean isActive = true;
 	
+	@JsonIgnore
 	@Column(name= "is_deleted", columnDefinition = "boolean default false")
 	private boolean isDeleted = false;
 	

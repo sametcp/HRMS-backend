@@ -12,7 +12,6 @@ import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.EmployerDao;
 import hrms.hrms.entities.concretes.Employer;
-import hrms.hrms.entities.concretes.JobAdvert;
 
 @Service
 public class EmployerManager implements EmployerService{
@@ -60,12 +59,10 @@ public class EmployerManager implements EmployerService{
 
 
 	@Override
-	public Result getByWebsite(String website) 
+	public DataResult<Employer> getByWebsite(String website) 
 	{
-		
-		this.employerDao.getByWebsite(website);
-		return new SuccessResult("Website getirildi");
-		
+		return new SuccessDataResult<Employer>
+		(this.employerDao.getByWebsite(website));
 	}
 
 

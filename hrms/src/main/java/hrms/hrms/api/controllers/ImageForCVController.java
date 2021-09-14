@@ -1,7 +1,6 @@
 package hrms.hrms.api.controllers;
  
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -28,7 +27,6 @@ import hrms.hrms.business.abstracts.ImageForCVService;
 import hrms.hrms.business.abstracts.JobseekerService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.ErrorDataResult;
-import hrms.hrms.core.utilities.results.ErrorResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.ImageForCV;
 import hrms.hrms.entities.concretes.Jobseeker;

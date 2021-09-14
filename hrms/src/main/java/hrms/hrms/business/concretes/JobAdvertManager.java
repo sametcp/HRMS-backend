@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import hrms.hrms.business.abstracts.JobAdvertService;
 import hrms.hrms.core.utilities.results.DataResult;
-import hrms.hrms.core.utilities.results.ErrorResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;

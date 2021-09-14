@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -43,6 +42,7 @@ public class Jobseeker extends User{
 	@Column(name= "date_of_birth")
 	private LocalDate dateOfBirth;
 	
+	@JsonIgnore
 	@Column(name = "is_verified", columnDefinition = "boolean default false")
 	private boolean isVerified = false;
 	
