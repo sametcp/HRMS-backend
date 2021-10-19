@@ -33,7 +33,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 public class User {
 	
-	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name= "id")

@@ -140,6 +140,12 @@ public class JobAdvertController {
 	}
 	
 	
+	@GetMapping("/getByEmployerId")
+	public ResponseEntity<?> getByEmployerId(@RequestParam int id)
+	{
+		return ResponseEntity.ok(this.jobAdvertService.getByEmployer_Id(id));
+	}
+	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
