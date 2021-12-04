@@ -4,4 +4,4 @@
 
 # HRMS-backend
 
-![Database diagram](https://github.com/sametcp/HRMS-backend/blob/master/hrms/Database%20Diagram.png)
+![Database diagram](https://user-images.githubusercontent.com/82918682/144726348-6e784180-c8cc-42e4-a95f-5dbf5f807d14.png)
